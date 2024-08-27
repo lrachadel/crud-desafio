@@ -14,10 +14,13 @@ export class ListagemComponent implements OnInit, OnDestroy {
   protected unsub$: Subject<void> = new Subject();
   estoque: Item[] = []
 
-  constructor(private estoqueService: EstoqueService){}
+  constructor(private estoqueService: EstoqueService){
+    console.log(JSON.parse(localStorage.getItem('itens')), "batata")
+  }
 
   ngOnInit(): void {
     this.getEstoque()
+
   }
 
   ngOnDestroy(): void {
@@ -26,12 +29,6 @@ export class ListagemComponent implements OnInit, OnDestroy {
   }
 
   getEstoque(){
-    this.estoqueService
-      .getAll()
-      .pipe(takeUntil(this.unsub$))
-      .subscribe((data) => { 
-        console.log(data, 'banana')
-        this.estoque = data 
-      });
+    this.estoque = this.estoqueService.getItens();
   }
 }
