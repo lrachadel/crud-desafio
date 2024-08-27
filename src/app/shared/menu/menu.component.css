@@ -1,0 +1,12 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+#side_nav{
+    background: #000;
+}
+
+.content{
+    min-height: 16rem;
+    width: 100%;
+}
+
+.bgwhite{background: white;}
