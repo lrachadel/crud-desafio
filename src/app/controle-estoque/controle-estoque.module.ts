@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { ControleEstoqueRoutingModule } from './controle-estoque-routing.module';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -11,6 +11,10 @@ import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { EditarComponent } from './components/editar/editar.component';
 import { ListagemComponent } from './components/listagem/listagem.component';
 import { FormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+
 
 
 @NgModule({
@@ -27,8 +31,12 @@ import { FormsModule } from '@angular/forms';
     InputMaskModule,
     CheckboxModule,
     InputNumberModule,
-    ButtonModule
+    ButtonModule,
+    CalendarModule,
+    BrowserAnimationsModule,
+    BrowserModule
   ],
+  providers: [DatePipe],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class ControleEstoqueModule { }

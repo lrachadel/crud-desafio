@@ -21,7 +21,7 @@ export class EstoqueService extends Init{
   addItem(newItem) {
      let itens = JSON.parse(localStorage.getItem('itens'));
      itens.push(newItem);
-     localStorage.setItem('itens', JSON.stringify(itens));
+     localStorage.setItem('itens', this.stringify(itens));
   }
 
   deleteItem(id) {
@@ -46,5 +46,20 @@ export class EstoqueService extends Init{
     }
 
     localStorage.setItem('itens', JSON.stringify(itens));
+  }
+
+  stringify(obj) {
+    let cache = [];
+    let str = JSON.stringify(obj, function(key, value) {
+      if (typeof value === "object" && value !== null) {
+        if (cache.indexOf(value) !== -1) {
+          return;
+        }
+        cache.push(value);
+      }
+      return value;
+    });
+    cache = null;
+    return str;
   }
 }

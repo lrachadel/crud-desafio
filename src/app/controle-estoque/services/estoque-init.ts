@@ -5,7 +5,7 @@ export class Init {
             {
                 id: 1 ,
                 nome: "Leite", 
-                unidade: "Litro", 
+                unidade: "LITRO", 
                 quantidade: 15, 
                 preco: 4.00, 
                 perecivel: false, 

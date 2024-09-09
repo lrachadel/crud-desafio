@@ -28,7 +28,18 @@ export class ListagemComponent implements OnInit, OnDestroy {
       this.unsub$.complete();
   }
 
-  getEstoque(){
+  getEstoque() {
     this.estoque = this.estoqueService.getItens();
+  }
+
+  deleteItem(id) {
+    console.log(id)
+    for(let i = 0; i < this.estoque.length; i++) {
+      if(this.estoque[i].id == id) {
+          this.estoque.splice(i, 1);
+      }
+    }
+
+    this.estoqueService.deleteItem(id);
   }
 }
