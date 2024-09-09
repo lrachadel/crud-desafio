@@ -17,7 +17,7 @@ export class CadastroComponent implements OnInit {
   item: Item = {
     id: uuid(),
     nome: null,
-    unidade: null,
+    unidade: UnidadeMedida.Litro,
     quantidade: null,
     preco: null,
     perecivel: false,
@@ -38,8 +38,7 @@ export class CadastroComponent implements OnInit {
 
   ngOnInit(): void {
     this.keys = Object.keys(UnidadeMedida);
-    this.item.unidade = this.keys[0] as UnidadeMedida
-    this.onChangeUnidade(this.keys[0])
+    this.onChangeUnidade(this.item.unidade);
   }
 
   onSubmit() {
@@ -55,13 +54,13 @@ export class CadastroComponent implements OnInit {
 
   onChangeUnidade(key) {
     switch (key){
-      case 'LITRO':
+      case 'Litro':
         this.tipoUnidade = 'lt'
         break;
-      case 'QUILOGRAMA':
+      case 'Quilograma':
         this.tipoUnidade = 'kg'
         break;
-      case 'UNIDADE':
+      case 'Unidade':
         this.tipoUnidade = 'un'
     }
   }
@@ -70,20 +69,22 @@ export class CadastroComponent implements OnInit {
     this.perecivel = event.checked
   }
 
-  onChangeValidade(event: Date) {
-    if (event.getDate() < this.data.getDate()) {
+  onChangeValidade(event: string) {
+    const selectDay = +event.slice(-2)
+
+    if (selectDay < this.data.getDate()) {
       this.naValidade = 'Fora da Validade'
-    }
-    else {
+    } else {
       this.naValidade = 'Dentro da Validade'
     }
   }
 
-  onChangeFabricacao(event: Date) {
-      this.fabricacaoFutura = event.getDate() > this.data.getDate()
+  onChangeFabricacao(event: string) {
+    const selectDay = +event.slice(-2)
 
+    this.fabricacaoFutura = selectDay  > this.data.getDate()
     if (this.perecivel) {
-      this.fabricacaoValidade = event.getDate() > this.item.validade.getDate()
+      this.fabricacaoValidade = selectDay > this.item.validade.getDate()
     }
   }
 

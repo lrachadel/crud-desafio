@@ -1,3 +1,5 @@
+import { UnidadeMedida } from "../models/unidade-medida.enum";
+
 export class Init {
     load() {
       if(localStorage.getItem('itens') === null || localStorage.getItem('itens') == undefined) {
@@ -5,7 +7,7 @@ export class Init {
             {
                 id: 1 ,
                 nome: "Leite", 
-                unidade: "LITRO", 
+                unidade: "Litro", 
                 quantidade: 15, 
                 preco: 4.00, 
                 perecivel: false, 

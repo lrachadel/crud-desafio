@@ -13,6 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 export class ListagemComponent implements OnInit, OnDestroy {
   protected unsub$: Subject<void> = new Subject();
   estoque: Item[] = []
+  displayModal = false
 
   constructor(private estoqueService: EstoqueService){
     console.log(JSON.parse(localStorage.getItem('itens')), "batata")
@@ -41,5 +42,10 @@ export class ListagemComponent implements OnInit, OnDestroy {
     }
 
     this.estoqueService.deleteItem(id);
+    this.displayModal = false
+  }
+
+  showModalDelete() {
+    this.displayModal = true
   }
 }

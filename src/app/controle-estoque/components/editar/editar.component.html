@@ -52,7 +52,7 @@
         <div class="mb-3">
             <label for="validade" class="form-label">Data de Validade <span *ngIf="perecivel">*</span></label>
             <div>
-                <p-calendar (ngModelChange)="onChangeValidade($event)" dateFormat="dd/mm/yy" styleClass="form-control" placeholder="dd/mm/aaaa" inputId="validade" [(ngModel)]="item.validade" [ngModelOptions]="{standalone: true}" [required]="perecivel" #validade="ngModel"></p-calendar>
+                <p-calendar (ngModelChange)="onChangeValidade($event)" dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" styleClass="form-control" placeholder="dd/mm/aaaa" inputId="validade" [(ngModel)]="item.validade" [ngModelOptions]="{standalone: true}" [required]="perecivel" #validade="ngModel"></p-calendar>
                 <div *ngIf="validade.invalid && (formItem.submitted || validade.touched)" class="alert alert-danger">
                     <div *ngIf="validade.errors?.required">
                         Data de Validade é um campo obrigatório.
