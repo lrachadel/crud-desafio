@@ -1,17 +1,24 @@
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="bg-dark col-auto col-md2 min-vh-100">
-            <div class="bg-dark p-2">
-                <a class="d-flex text-decoration-none align-items-center">
+<div class="container-fluid sidebar align-middle">
+    <div class="row flex-nowrap ">
+        <div class="bg-dark col-auto col-md2 min-vh-100 d-flex flex-column align-items-center">
+            <div class="bg-dark px-1">
+                <a class="d-flex text-decoration-none align-items-center pt-4 pb-1 px-2">
+                    <i class="pi pi-server fs-2 px-1"></i>
                     <span class="fs-4 d-none d-sm-inline">Estoque</span>
                 </a>
-                <ul class="nav nav-pills flex-column">
+                <ul class="nav nav-pills flex-column justify-content-center">
                     <li class="nav-item">
-                        <a href="" class="nav-link">Listagem</a>
+                        <a href="" class="nav-link d-flex align-items-center pt-4 pb-1 px-2">
+                            <i class="pi pi-bars px-1"></i> 
+                            <span class="d-none d-sm-inline">Listagem</span>
+                        </a>
                     </li>
                 </ul>
                 <div class="d-flex me-3">
-                    <button class="btn btn-success" routerLink="estoque/adicionar"><span class="text-white">Adicionar</span></button>
+                    <button class="btn btn-success" routerLink="estoque/adicionar">
+                        <i class="pi pi-plus text-white px-1"></i>
+                        <span class="text-white d-none d-sm-inline">Adicionar</span>
+                    </button>
                 </div>
             </div>
         </div>

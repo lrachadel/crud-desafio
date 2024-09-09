@@ -80,8 +80,7 @@ export class CadastroComponent implements OnInit {
   }
 
   onChangeFabricacao(event: string) {
-    const selectDay = +event.slice(-2)
-
+    const selectDay = +event.slice(0, -8)
     this.fabricacaoFutura = selectDay  > this.data.getDate()
     if (this.perecivel) {
       this.fabricacaoValidade = selectDay > this.item.validade.getDate()

@@ -34,7 +34,7 @@ export class EditarComponent implements OnInit {
   }
 
   onSubmit() {
-    if( this.fabricacaoFutura || this.fabricacaoValidade ) {
+    if( !this.fabricacaoFutura || !this.fabricacaoValidade ) {
       this.estoqueService.updateItem(this.item, this.formItem.form.value);
       this.router.navigate(['estoque']);
     }

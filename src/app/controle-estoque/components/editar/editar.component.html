@@ -1,6 +1,6 @@
 <div class="container">
-    <h3>Editar item do estoque</h3>
-    <form #formItem="ngForm" id="item" (ngSubmit)="formItem.form.valid && onSubmit()" novalidate>
+    <h3 class="mt-2">Editar item do estoque</h3>
+    <form class="ms-2 mt-1" #formItem="ngForm" id="item" (ngSubmit)="formItem.form.valid && onSubmit()" novalidate>
         <div class="mb-3">
             <label for="txtNome" class="form-label">Nome do item <span>*</span></label>
             <input type="text" pInputText name="nome" class="form-control" id="txtNome" [(ngModel)]="item.nome" [ngModelOptions]="{standalone: true}" required #nome="ngModel"/>
@@ -52,7 +52,7 @@
         <div class="mb-3">
             <label for="validade" class="form-label">Data de Validade <span *ngIf="perecivel">*</span></label>
             <div>
-                <p-calendar (ngModelChange)="onChangeValidade($event)" dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" styleClass="form-control" placeholder="dd/mm/aaaa" inputId="validade" [(ngModel)]="item.validade" [ngModelOptions]="{standalone: true}" [required]="perecivel" #validade="ngModel"></p-calendar>
+                <p-calendar (ngModelChange)="onChangeValidade($event)" dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" dataType="string" styleClass="form-control" placeholder="dd/mm/aaaa" inputId="validade" [(ngModel)]="item.validade" [ngModelOptions]="{standalone: true}" [required]="perecivel" #validade="ngModel"></p-calendar>
                 <div *ngIf="validade.invalid && (formItem.submitted || validade.touched)" class="alert alert-danger">
                     <div *ngIf="validade.errors?.required">
                         Data de Validade é um campo obrigatório.
@@ -65,7 +65,7 @@
         <div class="mb-3">
             <label for="fabricacao" class="form-label">Data de Fabricação <span>*</span></label>
             <div>
-                <p-calendar (ngModelChange)="onChangeFabricacao($event)" dateFormat="dd/mm/yy" dataType="string" placeholder="dd/mm/aaaa" styleClass="form-control" inputId="fabricacao" [(ngModel)]="item.fabricacao" [ngModelOptions]="{standalone: true}" required #fabricacao="ngModel"></p-calendar>
+                <p-calendar (ngModelChange)="onChangeFabricacao($event)" dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" dataType="string" placeholder="dd/mm/aaaa" styleClass="form-control" inputId="fabricacao" [(ngModel)]="item.fabricacao" [ngModelOptions]="{standalone: true}" required #fabricacao="ngModel"></p-calendar>
                 <div *ngIf="fabricacaoFutura || fabricacaoValidade || fabricacao.invalid && (formItem.submitted || fabricacao.touched)" class="alert alert-danger">
                     <div *ngIf="fabricacao.errors?.required">
                         Data de Fabricação é um campo obrigatório.
@@ -82,7 +82,7 @@
 
         <button class="btn btn-secondary" (click)="onCancel()"><span class="text-white">Cancelar</span></button>
 
-        <button class="btn btn-success" form="item"><span class="text-white">Salvar</span></button>  
+        <button class="btn btn-success ms-2" form="item"><span class="text-white">Salvar</span></button>  
     </form>
     
 </div>

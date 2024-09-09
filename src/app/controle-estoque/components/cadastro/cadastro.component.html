@@ -1,6 +1,6 @@
 <div class="container">
-    <h3>Adicionar item ao estoque</h3>
-    <form #formItem="ngForm" id="item" (ngSubmit)="formItem.form.valid && onSubmit()" novalidate>
+    <h3 class="mt-2">Adicionar item ao estoque</h3>
+    <form class="ms-2 mt-1" #formItem="ngForm" id="item" (ngSubmit)="formItem.form.valid && onSubmit()" novalidate>
         <div class="mb-3">
             <label for="txtNome" class="form-label">Nome do item <span>*</span></label>
             <input type="text" pInputText name="nome" class="form-control" id="txtNome" [(ngModel)]="item.nome" [ngModelOptions]="{standalone: true}" required #nome="ngModel"/>
@@ -82,7 +82,7 @@
 
         <button class="btn btn-secondary" (click)="onCancel()"><span class="text-white">Cancelar</span></button>
 
-        <button class="btn btn-success" form="item"><span class="text-white">Salvar</span></button>  
+        <button class="btn btn-success ms-2" form="item"><span class="text-white">Salvar</span></button>  
     </form>
     
 </div>
