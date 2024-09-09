@@ -8,6 +8,6 @@ export interface Item {
   quantidade: number;
   preco: number;
   perecivel: boolean;
-  validade: string;
-  fabricacao: string;
+  validade: Date;
+  fabricacao: Date;
 }

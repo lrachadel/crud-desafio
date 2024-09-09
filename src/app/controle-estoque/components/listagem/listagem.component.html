@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid container-table">
     <table class="table">
         <thead>
             <tr>
@@ -20,7 +20,18 @@
                 <td>{{ item.perecivel }}</td>
                 <td>{{ item.validade }}</td>
                 <td>{{ item.fabricacao }}</td>
+
+                <a [routerLink]="['/estoque/editar', item.id]" class="btn btn-primary">Edit</a>
+                <button type="button" (click)="showModalDelete()" class="btn btn-danger">Delete</button>
+
+                <p-dialog header="Deletar" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+                    <p class="p-m-0">Você tem certeza que deseja deletar o item {{item.nome}}</p>
+                        <ng-template pTemplate="footer">
+                            <p-button icon="pi pi-check" (click)="deleteItem(item.id)" label="Tenho certeza" styleClass="p-button-text"></p-button>
+                        </ng-template>
+                </p-dialog>
             </tr>
         </tbody>
     </table>
+   
 </div>

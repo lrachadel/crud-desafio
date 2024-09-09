@@ -1,54 +1,88 @@
 <div class="container">
-    <h3>Adicionar item ao estoque</h3>
-    <form id="item">
+    <h3 class="mt-2">Adicionar item ao estoque</h3>
+    <form class="ms-2 mt-1" #formItem="ngForm" id="item" (ngSubmit)="formItem.form.valid && onSubmit()" novalidate>
         <div class="mb-3">
-            <label for="txtNome" class="form-label">Nome do item</label>
-            <input type="text" name="nome" class="form-control" id="txtNome" [(ngModel)]="formItem.nome" [ngModelOptions]="{standalone: true}" required/>
+            <label for="txtNome" class="form-label">Nome do item <span>*</span></label>
+            <input type="text" pInputText name="nome" class="form-control" id="txtNome" [(ngModel)]="item.nome" [ngModelOptions]="{standalone: true}" required #nome="ngModel"/>
+            <div *ngIf="nome.invalid && (formItem.submitted || nome.touched)" class="alert alert-danger">
+                <div *ngIf="nome.errors?.required">
+                    Nome é um campo obrigatório.
+                </div>
+            </div>
         </div>
 
         <div class="mb-3">
-            <label for="txtUnidade" class="form-label">Unidade de Medida</label>
+            <label for="txtUnidade" class="form-label">Unidade de Medida <span>*</span></label>
             <div *ngFor="let key of keys" class="p-field-checkbox">
-                <p-radioButton [inputId]="key" [name]="'unidade'" id="txtnome" (onClick)="onChangeUnidade(key)" [value]="key" [(ngModel)]="formItem.unidade" [ngModelOptions]="{standalone: true}"></p-radioButton>
+                <p-radioButton [inputId]="key" [name]="'unidade'" id="txtnome" (onClick)="onChangeUnidade(key)" [value]="key" [(ngModel)]="item.unidade" [ngModelOptions]="{standalone: true}" required #unidade="ngModel"></p-radioButton>
                 <label [for]="key">{{ unidadeMedida[key] }}</label>
+                <div *ngIf="unidade.invalid && (formItem.submitted || unidade.touched)" class="alert alert-danger">
+                    <div *ngIf="unidade.errors?.required">
+                        Unidade é um campo obrigatório.
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="mb-3">
             <label for="qtd" class="form-label">Quantidade</label>
             <div class="p-inputgroup">
-                <input type="number" name="nome" class="form-control" id="qtd"  min="0" [(ngModel)]="formItem.quantidade" [ngModelOptions]="{standalone: true}" required>
+                <p-inputNumber type="number" name="nome" id="qtd" inputStyleClass="form-control" styleClass="form-control" min="0" [(ngModel)]="item.quantidade" [ngModelOptions]="{standalone: true}"></p-inputNumber>
                 <span class="p-inputgroup-addon">{{ tipoUnidade }}</span>
             </div>
         </div>
 
         <div class="mb-3">
-            <label for="preco" class="form-label">Preço</label>
+            <label for="preco" class="form-label">Preço <span>*</span></label>
             <div>
-                <p-inputNumber mode="currency" inputId="preco" currency="BRL" locale="pt-BR" dir="rtl" [(ngModel)]="formItem.preco" [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                <p-inputNumber mode="currency" inputId="preco" currency="BRL" inputStyleClass="form-control" styleClass="form-control" locale="pt-BR" dir="rtl" min="0.01" [(ngModel)]="item.preco" [ngModelOptions]="{standalone: true}" required #preco="ngModel"></p-inputNumber>
+                <div *ngIf="preco.invalid && (formItem.submitted || preco.touched)" class="alert alert-danger">
+                    <div *ngIf="preco.errors?.required">
+                        Preço é um campo obrigatório.
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="mb-3 p-field-checkbox">
-            <p-checkbox binary="true" inputId="perecivel" [(ngModel)]="formItem.perecivel" [ngModelOptions]="{standalone: true}"></p-checkbox>
+            <p-checkbox binary="true" inputId="perecivel" [(ngModel)]="item.perecivel" [ngModelOptions]="{standalone: true}" (onChange)="onChangePerecivel($event)"></p-checkbox>
             <label for="binary">Produto perecível</label>
         </div>
 
         <div class="mb-3">
-            <label for="validade" class="form-label">Data de Validade</label>
+            <label for="validade" class="form-label">Data de Validade <span *ngIf="perecivel">*</span></label>
             <div>
-                <p-inputMask mask="99/99/9999" placeholder="dd/mm/aaaa" inputId="validade" [(ngModel)]="formItem.validade" [ngModelOptions]="{standalone: true}"></p-inputMask>
+                <p-calendar (ngModelChange)="onChangeValidade($event)" dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" dataType="string"  styleClass="form-control" placeholder="dd/mm/aaaa" inputId="validade" [(ngModel)]="item.validade" [ngModelOptions]="{standalone: true}" [required]="perecivel" #validade="ngModel"></p-calendar>
+                <div *ngIf="validade.invalid && (formItem.submitted || validade.touched)" class="alert alert-danger">
+                    <div *ngIf="validade.errors?.required">
+                        Data de Validade é um campo obrigatório.
+                    </div>
+                </div>
             </div>
+            <label *ngIf="perecivel" for="validade">{{ naValidade }}</label>
         </div>
 
         <div class="mb-3">
-            <label for="fabricacao" class="form-label">Data de Fabricação</label>
+            <label for="fabricacao" class="form-label">Data de Fabricação <span>*</span></label>
             <div>
-                <p-inputMask mask="99/99/9999" placeholder="dd/mm/aaaa" inputId="fabricacao" [(ngModel)]="formItem.fabricacao" [ngModelOptions]="{standalone: true}"></p-inputMask>
+                <p-calendar (ngModelChange)="onChangeFabricacao($event)" dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" placeholder="dd/mm/aaaa" dataType="string" styleClass="form-control" inputId="fabricacao" [(ngModel)]="item.fabricacao" [ngModelOptions]="{standalone: true}" required #fabricacao="ngModel"></p-calendar>
+                <div *ngIf="fabricacaoFutura || fabricacaoValidade || fabricacao.invalid && (formItem.submitted || fabricacao.touched)" class="alert alert-danger">
+                    <div *ngIf="fabricacao.errors?.required">
+                        Data de Fabricação é um campo obrigatório.
+                    </div>
+                    <div *ngIf="fabricacaoFutura">
+                        Data de Fabricação é maior que a data atual
+                    </div>
+                    <div *ngIf="fabricacaoValidade">
+                        Data de Fabricação é maior que a Data de Validade
+                    </div>
+                </div>
             </div>
         </div>
 
-        
+        <button class="btn btn-secondary" (click)="onCancel()"><span class="text-white">Cancelar</span></button>
+
+        <button class="btn btn-success ms-2" form="item"><span class="text-white">Salvar</span></button>  
     </form>
-    <button class="btn btn-success" form="item" (click)="onSubmit()"><span class="text-white">Salvar</span></button>
+    
 </div>
