@@ -2,8 +2,8 @@ import { UnidadeMedida } from "../models/unidade-medida.enum";
 
 export class Init {
     load() {
-      if(localStorage.getItem('itens') === null || localStorage.getItem('itens') == undefined) {
-        let itens = [
+      if(localStorage.getItem('items') === null || localStorage.getItem('items') == undefined) {
+        let items = [
             {
                 id: 1 ,
                 nome: "Leite", 
@@ -16,7 +16,7 @@ export class Init {
             }
         ];
   
-        localStorage.setItem('itens', JSON.stringify(itens));
+        localStorage.setItem('items', JSON.stringify(items));
         return 
       }
     }

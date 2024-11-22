@@ -14,38 +14,38 @@ export class EstoqueService extends Init{
   }
 
   getItens() {
-    let item = JSON.parse(localStorage.getItem('itens'));
+    let item = JSON.parse(localStorage.getItem('items'));
     return item;
   }
 
   addItem(newItem) {
-     let itens = JSON.parse(localStorage.getItem('itens'));
-     itens.push(newItem);
-     localStorage.setItem('itens', this.stringify(itens));
+     let items = JSON.parse(localStorage.getItem('items'));
+     items.push(newItem);
+     localStorage.setItem('items', this.stringify(items));
   }
 
   deleteItem(id) {
-    let itens = JSON.parse(localStorage.getItem('itens'));
+    let items = JSON.parse(localStorage.getItem('items'));
 
-    for(let i = 0; i <itens.length; i++) {
-     if(itens[i].id == id) {
-       itens.splice(i, 1);
+    for(let i = 0; i <items.length; i++) {
+     if(items[i].id == id) {
+       items.splice(i, 1);
      }
     }
 
-    localStorage.setItem('itens', JSON.stringify(itens));
+    localStorage.setItem('items', JSON.stringify(items));
   }
 
   updateItem(oldItem, newItem) {
-    let itens = JSON.parse(localStorage.getItem('itens'));
+    let items = JSON.parse(localStorage.getItem('items'));
 
-    for(let i = 0; i <itens.length; i++) {
-     if(itens[i].id == oldItem.id) {
-       itens[i] = newItem;
+    for(let i = 0; i <items.length; i++) {
+     if(items[i].id == oldItem.id) {
+       items[i] = newItem;
      }
     }
 
-    localStorage.setItem('itens', JSON.stringify(itens));
+    localStorage.setItem('items', JSON.stringify(items));
   }
 
   stringify(obj) {

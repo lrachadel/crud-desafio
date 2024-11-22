@@ -16,7 +16,7 @@ export class ListagemComponent implements OnInit, OnDestroy {
   displayModal = false
 
   constructor(private estoqueService: EstoqueService){
-    console.log(JSON.parse(localStorage.getItem('itens')), "batata")
+    console.log(JSON.parse(localStorage.getItem('items')), "batata")
   }
 
   ngOnInit(): void {
