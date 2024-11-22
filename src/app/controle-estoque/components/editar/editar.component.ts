@@ -82,7 +82,7 @@ export class EditarComponent implements OnInit {
 
   getItem() {
     this.id = this._Activatedroute.snapshot.params['id'];
-    const itens = this.estoqueService.getItens();
-    this.item = itens.find(iten => iten.id==this.id);
+    const items = this.estoqueService.getItens();
+    this.item = items.find(item => item.id==this.id);
   }
 }
